@@ -11,32 +11,32 @@ using Codeflow.Dal;
 
 namespace Codeflow.Controllers
 {
-    public class UpvotesController : Controller
+    public class DownvotesController : Controller
     {
         private CodeFlowContext db = new CodeFlowContext();
 
-        // GET: /Upvotes/
+        // GET: /Downvotes/
         public ActionResult Index()
         {
-            return View(db.AUpvotes.ToList());
+            return View(db.ADownvotes.ToList());
         }
 
-        // GET: /Upvotes/Details/5
+        // GET: /Downvotes/Details/5
         public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Upvotes upvotes = db.AUpvotes.Find(id);
-            if (upvotes == null)
+            Downvotes downvotes = db.ADownvotes.Find(id);
+            if (downvotes == null)
             {
                 return HttpNotFound();
             }
-            return View(upvotes);
+            return View(downvotes);
         }
 
-        // GET: /Upvotes/Create
+        // GET: /Downvotes/Create
         public ActionResult Create(Guid? id)
         {
             if (id == null)
@@ -51,14 +51,14 @@ namespace Codeflow.Controllers
             return Create(answer);
         }
 
-        // POST: /Upvotes/Create
+        // POST: /Downvotes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="Id,AnswerId,AccountId")] Answer answer)
         {
-            Upvotes userquestionvotes = new Upvotes(); ;
+            Downvotes userquestionvotes = new Downvotes(); ;
             if (ModelState.IsValid)
             {
                 bool logged = (System.Web.HttpContext.Current.User != null) &&
@@ -70,16 +70,17 @@ namespace Codeflow.Controllers
                     Upvotes upvotes =
                         db.AUpvotes.FirstOrDefault(
                             a => a.Id.Equals(answer.Id) && a.AccountId.Equals(owner.ID));
+
                     Downvotes downvotes =
                         db.ADownvotes.FirstOrDefault(
                             a => a.Id.Equals(answer.Id) && a.AccountId.Equals(owner.ID));
 
-                    if (upvotes == null && downvotes == null)
+                    if (upvotes == null&& downvotes == null)
                     {
                         userquestionvotes.Id = Guid.NewGuid();
                         userquestionvotes.AnswerId = answer.Id;
                         userquestionvotes.AccountId = owner.ID;
-                        db.AUpvotes.Add(userquestionvotes);
+                        db.ADownvotes.Add(userquestionvotes);
                         db.SaveChanges();
                         return RedirectToAction("Details", "Question", new { id = answer.QuestionID });
                     }
@@ -97,59 +98,59 @@ namespace Codeflow.Controllers
             return RedirectToAction("Details", "Question", new { id = answer.QuestionID });
         }
 
-        // GET: /Upvotes/Edit/5
+        // GET: /Downvotes/Edit/5
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Upvotes upvotes = db.AUpvotes.Find(id);
-            if (upvotes == null)
+            Downvotes downvotes = db.ADownvotes.Find(id);
+            if (downvotes == null)
             {
                 return HttpNotFound();
             }
-            return View(upvotes);
+            return View(downvotes);
         }
 
-        // POST: /Upvotes/Edit/5
+        // POST: /Downvotes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,AnswerId,AccountId")] Upvotes upvotes)
+        public ActionResult Edit([Bind(Include="Id,AnswerId,AccountId")] Downvotes downvotes)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(upvotes).State = EntityState.Modified;
+                db.Entry(downvotes).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(upvotes);
+            return View(downvotes);
         }
 
-        // GET: /Upvotes/Delete/5
+        // GET: /Downvotes/Delete/5
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Upvotes upvotes = db.AUpvotes.Find(id);
-            if (upvotes == null)
+            Downvotes downvotes = db.ADownvotes.Find(id);
+            if (downvotes == null)
             {
                 return HttpNotFound();
             }
-            return View(upvotes);
+            return View(downvotes);
         }
 
-        // POST: /Upvotes/Delete/5
+        // POST: /Downvotes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Upvotes upvotes = db.AUpvotes.Find(id);
-            db.AUpvotes.Remove(upvotes);
+            Downvotes downvotes = db.ADownvotes.Find(id);
+            db.ADownvotes.Remove(downvotes);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

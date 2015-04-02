@@ -20,5 +20,6 @@ namespace Codeflow.Models
         public virtual Question Question { get; set; }
         //public virtual Account Account { get; set; }
         public virtual ICollection<Upvotes> Upvotes{ get; set; }
+        public virtual ICollection<Downvotes> Downvotes { get; set;}
     }
 }

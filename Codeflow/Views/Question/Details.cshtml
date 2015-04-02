@@ -79,10 +79,12 @@
                             @Html.DisplayFor(modelItem => item.Upvotes.Count)
                         </td>
                         <td>
-                            @Html.ActionLink("Upvote", "Upvote", new {id = item.QuestionID}) |
-                            @Html.ActionLink("Downvote", "Details", new {id = item.QuestionID}) |
-                            @Html.ActionLink("Answer", "Create", new {id = item.QuestionID})|
-                            @Html.ActionLink("Details", "Details", new {id = item.QuestionID})
+                            <a href='@Url.Action("Create", "Upvotes", new {id = item.Id}, null)'>
+                                <input type="submit" value='Up Vote'/>
+                            </a>
+                            <a href='@Url.Action("Create", "Downvotes", new {id = item.Id },null)'>
+                                <input type="submit" value='Up Vote' />
+                            </a>
                         </td>
                     </tr>
 
