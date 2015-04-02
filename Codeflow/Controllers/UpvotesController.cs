@@ -69,10 +69,10 @@ namespace Codeflow.Controllers
                     Account owner = db.Accounts.FirstOrDefault(a => a.Email.Equals(OwnerName));
                     Upvotes upvotes =
                         db.AUpvotes.FirstOrDefault(
-                            a => a.Id.Equals(answer.Id) && a.AccountId.Equals(owner.ID));
+                            a => a.AnswerId.Equals(answer.Id) && a.AccountId.Equals(owner.ID));
                     Downvotes downvotes =
                         db.ADownvotes.FirstOrDefault(
-                            a => a.Id.Equals(answer.Id) && a.AccountId.Equals(owner.ID));
+                            a => a.AnswerId.Equals(answer.Id) && a.AccountId.Equals(owner.ID));
 
                     if (upvotes == null && downvotes == null)
                     {

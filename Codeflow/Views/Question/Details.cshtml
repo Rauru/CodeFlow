@@ -75,15 +75,20 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Answerstring)
                         </td>
+                        @{
+                            int avotes = item.Upvotes.Count;
+                            int avotes2 = item.Downvotes.Count;
+                            int avotes3 = avotes - avotes2;
+                        }
                         <td>
-                            @Html.DisplayFor(modelItem => item.Upvotes.Count)
+                            @Html.DisplayFor(modelItem => avotes3)
                         </td>
                         <td>
                             <a href='@Url.Action("Create", "Upvotes", new {id = item.Id}, null)'>
                                 <input type="submit" value='Up Vote'/>
                             </a>
                             <a href='@Url.Action("Create", "Downvotes", new {id = item.Id },null)'>
-                                <input type="submit" value='Up Vote' />
+                                <input type="submit" value='Down Vote' />
                             </a>
                         </td>
                     </tr>
