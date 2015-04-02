@@ -41,13 +41,13 @@
         <dd>
             @Html.DisplayFor(model => model.Email)
         </dd>
-
+        @{ String Views = "views";}
         <dt>
-            @Html.DisplayNameFor(model => model.Password)
+            @Html.DisplayNameFor(model => Views)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Password)
+            @Html.DisplayFor(model => model.AccountViews.Count)
         </dd>
 
         <dt>

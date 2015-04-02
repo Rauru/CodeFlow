@@ -19,8 +19,8 @@ namespace Codeflow.Controllers
         // GET: /Question/
         public ActionResult Index(string sortOrder)
         {
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Answers" : "";
-            ViewBag.DateSortParm = sortOrder == "Answers" ? "Votes" : "View";
+            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Answers" : "";
+            //ViewBag.DateSortParm = sortOrder == "Answers" ? "Votes" : "View";
             var questions = from s in db.Questions
                            select s;
             switch (sortOrder)

@@ -35,7 +35,17 @@ namespace Codeflow.Controllers
             {
                 return HttpNotFound();
             }
+            Addview(account.ID);
             return View(account);
+        }
+
+        public void Addview(Guid id)
+        {
+            AccountViews aview = new AccountViews();
+            aview.Id = Guid.NewGuid();
+            aview.QuestionId = id;
+            db.Aviews.Add(aview);
+            db.SaveChanges();
         }
 
         // GET: /Account/Create

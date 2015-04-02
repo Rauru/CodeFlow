@@ -48,5 +48,6 @@ namespace Codeflow.Models
         public string ConfirmPassword { get; set; }
 
         public virtual ICollection<Question> Questions { get; set; }
+        public virtual ICollection<AccountViews> AccountViews { get; set; }
     }
 }

@@ -152,6 +152,7 @@
     </Compile>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountLogInModel.cs" />
+    <Compile Include="Models\AccountViews.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\Downvotes.cs" />
     <Compile Include="Models\PassRecoveryMailgun.cs" />

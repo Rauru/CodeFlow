@@ -90,7 +90,8 @@ namespace Codeflow.Dal
                     Votes = 0,
                     OwnerName = "Raul",
                     QuestionID = idtq,
-                    AccountID = idt
+                    AccountID = idt,
+                    ATime = DateTime.Now
                     
                 },
                 new Answer
@@ -100,7 +101,8 @@ namespace Codeflow.Dal
                     Votes = 1,
                     OwnerName = "Rauru",
                     QuestionID = idtq2,
-                    AccountID = idt2
+                    AccountID = idt2,
+                    ATime = DateTime.Now
                     
                 }
 
