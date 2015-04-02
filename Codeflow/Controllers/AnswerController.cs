@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -52,19 +53,27 @@ namespace Codeflow.Controllers
         {
             if (ModelState.IsValid)
             {
-                answer.Id = Guid.NewGuid();
-                answer.QuestionID = id;
-                answer.OwnerName = System.Web.HttpContext.Current.User.Identity.Name;
-                //if (User.Identity.IsAuthenticated)
-                //{
-                    //answer.AccountID = Answer answer = db.Answers.Find(id);
-                    Account owner = db.Accounts.FirstOrDefault(a => a.Email.Equals(answer.OwnerName)); 
-                    answer.AccountID = owner.ID;
-                    db.Answers.Add(answer);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                //}
+                bool logged = (System.Web.HttpContext.Current.User != null) &&
+                              System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+                if (logged)
+                {
+                    MatchCollection collection = Regex.Matches(answer.Answerstring, @"[\S]+");
+                    if (collection.Count >= 3)
+                    {
+                        answer.Id = Guid.NewGuid();
+                        answer.QuestionID = id;
+                        String OwnerName = System.Web.HttpContext.Current.User.Identity.Name;
+                        Account owner = db.Accounts.FirstOrDefault(a => a.Email.Equals(OwnerName));
+                        answer.AccountID = owner.ID;
+                        answer.OwnerName = owner.FirstName;
+                        db.Answers.Add(answer);
+                        db.SaveChanges();
+                        return RedirectToAction("Details", "Question", new { id = answer.QuestionID });
+                    }
+                    ModelState.AddModelError("", "A minium of 5 words required for the Description");
+                }
             }
+        
 
             return View(answer);
         }
@@ -93,10 +102,14 @@ namespace Codeflow.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                db.Entry(answer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                System.Text.RegularExpressions.MatchCollection wordColl = System.Text.RegularExpressions.Regex.Matches(answer.Answerstring, @"[\S]+");
+                if (wordColl.Count>=5)
+                {
+                    db.Entry(answer).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Details", "Question", new { id = answer.QuestionID });
+                }
+                ModelState.AddModelError("", "A minium of 5 words required");
             }
             return View(answer);
         }

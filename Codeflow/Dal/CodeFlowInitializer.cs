@@ -34,13 +34,15 @@ namespace Codeflow.Dal
             {
                 new Question
                 {
+                    QuestionTittle = "asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg",
                     QuestionID = idtq,
-                    QuestionString = "what is love?",
+                    QuestionString = "uno dos tres cuatro cinco?",
                     AccountID = idt,
                     Votes = 1
                 },
                 new Question
                 {
+                     QuestionTittle = "qwert qwert qwert qwert qwert qwert qwert qwert qwert qwert qwert",
                     QuestionID = idtq2,
                     QuestionString = "what is the meaning of life",
                     AccountID = idt2,
@@ -82,7 +84,7 @@ namespace Codeflow.Dal
                 new Answer
                 {
                     Id = idta,
-                    Answerstring = "baby dont hurt me", 
+                    Answerstring = "uno dos tres cuatro cinco", 
                     Votes = 0,
                     OwnerName = "Raul",
                     QuestionID = idtq,
@@ -92,7 +94,7 @@ namespace Codeflow.Dal
                 new Answer
                 {
                     Id = idta2,
-                    Answerstring = "42",
+                    Answerstring = "one two three four five",
                     Votes = 1,
                     OwnerName = "Rauru",
                     QuestionID = idtq2,

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Codeflow.Models;
@@ -57,12 +58,32 @@ namespace Codeflow.Controllers
             //Question question = new Question();
             if (ModelState.IsValid)
             {
-                question.QuestionID = Guid.NewGuid();
-                question.Votes = 0;
-                question.AccountID = id;
-                db.Questions.Add(question);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                bool logged = (System.Web.HttpContext.Current.User != null) &&
+                            System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+                if (logged)
+                {
+                    String OwnerName = System.Web.HttpContext.Current.User.Identity.Name;
+                    Account owner = db.Accounts.FirstOrDefault(a => a.Email.Equals(OwnerName));
+                    MatchCollection collection = Regex.Matches(question.QuestionTittle, @"[\S]+");
+                    if (collection.Count >= 3)
+                    {
+                        MatchCollection collectiontitle = Regex.Matches(question.QuestionString, @"[\S]+");
+                        if (collectiontitle.Count >= 5)
+                        {
+                            question.QuestionID = Guid.NewGuid();
+                            question.Votes = 0;
+                            question.AccountID = owner.ID;
+                            db.Questions.Add(question);
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        ModelState.AddModelError("", "A minium of 5 words required for the Description");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "A minium of 3 words required for the title");
+                    }
+                }
             }
 
             return View(question);

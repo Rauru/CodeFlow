@@ -13,7 +13,7 @@ namespace Codeflow.Models
     {
         [Key]
         public Guid ID { get; set; }
-        [DisplayName("First Name")]
+        [DisplayName("User")]
         [Required]
         [StringLength(50, ErrorMessage = "The name must contain 2 to 50 character", MinimumLength = 2)]
         public string FirstName { get; set; }

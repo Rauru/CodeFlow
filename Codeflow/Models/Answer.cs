@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,10 @@ namespace Codeflow.Models
         [Key]
         public Guid Id { get; set; }
 
+        [DisplayName("Answer")]
+        [StringLength(100, ErrorMessage = "The password must contain at least 50 characters", MinimumLength = 50)]
         public string Answerstring { get; set; }
+
         public int Votes { get; set; }
         public string OwnerName { get; set; }
         public Guid QuestionID { get; set; }
