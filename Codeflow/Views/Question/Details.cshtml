@@ -47,6 +47,22 @@
             @Html.DisplayFor(model => votes3)
         </dd>
 
+        @{ string Asked = "View";}
+        <dt>
+            @Html.DisplayNameFor(model => Asked)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.QTime)
+        </dd>
+
+        @{ string Views = "View";}
+        <dt>
+            @Html.DisplayNameFor(model => Views)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Questionviews.Count)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Answers)
         </dt>

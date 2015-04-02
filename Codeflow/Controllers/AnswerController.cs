@@ -66,6 +66,7 @@ namespace Codeflow.Controllers
                         Account owner = db.Accounts.FirstOrDefault(a => a.Email.Equals(OwnerName));
                         answer.AccountID = owner.ID;
                         answer.OwnerName = owner.FirstName;
+                        answer.ATime = DateTime.Now;
                         db.Answers.Add(answer);
                         db.SaveChanges();
                         return RedirectToAction("Details", "Question", new { id = answer.QuestionID });

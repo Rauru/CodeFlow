@@ -38,14 +38,16 @@ namespace Codeflow.Dal
                     QuestionID = idtq,
                     QuestionString = "uno dos tres cuatro cinco?",
                     AccountID = idt,
+                    QTime= DateTime.Now,
                     Votes = 1
                 },
                 new Question
                 {
-                     QuestionTittle = "qwert qwert qwert qwert qwert qwert qwert qwert qwert qwert qwert",
+                    QuestionTittle = "qwert qwert qwert qwert qwert qwert qwert qwert qwert qwert qwert",
                     QuestionID = idtq2,
                     QuestionString = "what is the meaning of life",
                     AccountID = idt2,
+                    QTime= DateTime.Now,
                     Votes = 2
                 }
 

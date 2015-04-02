@@ -39,6 +39,7 @@ namespace Codeflow.Controllers
                 ModelState.AddModelError("CustomE", Request.Cookies["Voted"].Values["Avoted"]);
                 Response.Cookies["Voted"].Expires = DateTime.Now.AddDays(-1);
             }
+            Addview(question.QuestionID);
             return View(question);
         }
 
@@ -73,6 +74,7 @@ namespace Codeflow.Controllers
                             question.QuestionID = Guid.NewGuid();
                             question.Votes = 0;
                             question.AccountID = owner.ID;
+                            question.QTime = DateTime.Now;
                             db.Questions.Add(question);
                             db.SaveChanges();
                             return RedirectToAction("Index");
@@ -87,6 +89,15 @@ namespace Codeflow.Controllers
             }
 
             return View(question);
+        }
+
+        public void Addview(Guid id)
+        {
+            QuestionViews qview = new QuestionViews();
+            qview.Id = Guid.NewGuid();
+            qview.QuestionId = id;
+            db.Qviews.Add(qview);
+            db.SaveChanges();
         }
 
         // GET: /Question/Edit/5

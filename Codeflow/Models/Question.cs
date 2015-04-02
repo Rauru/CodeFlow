@@ -21,13 +21,16 @@ namespace Codeflow.Models
         [DisplayName("Description")]
         public string QuestionString { get; set; }
 
+        public DateTime QTime { get; set; }
+
         public Guid AccountID { get; set; }
         public int Votes{ get; set; }
 
         public virtual Account Account { get; set; }
         public virtual ICollection<Answer> Answers { get; set; }
         public virtual ICollection<UserQuestionVotes> Votetotals { get; set; }
-        public virtual ICollection<UserQuestionMinus> Voteminus { get; set; } 
+        public virtual ICollection<UserQuestionMinus> Voteminus { get; set; }
+        public virtual ICollection<QuestionViews> Questionviews { get; set; }
         
     }
 }

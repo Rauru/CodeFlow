@@ -19,7 +19,8 @@ namespace Codeflow.Dal
         public DbSet<UserQuestionVotes> Qvotes { get; set; }
         public DbSet<UserQuestionMinus> Qvotesminus { get; set; }
         public DbSet<Upvotes> AUpvotes { get; set; }
-        public DbSet<Downvotes> ADownvotes { get; set; } 
+        public DbSet<Downvotes> ADownvotes { get; set; }
+        public DbSet<QuestionViews> Qviews { get; set; } 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

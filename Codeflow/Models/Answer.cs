@@ -16,6 +16,8 @@ namespace Codeflow.Models
         [StringLength(100, ErrorMessage = "The password must contain at least 50 characters", MinimumLength = 50)]
         public string Answerstring { get; set; }
 
+        public DateTime ATime { get; set; }
+
         public int Votes { get; set; }
         public string OwnerName { get; set; }
         public Guid QuestionID { get; set; }
