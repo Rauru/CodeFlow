@@ -17,9 +17,31 @@ namespace Codeflow.Controllers
         private CodeFlowContext db = new CodeFlowContext();
 
         // GET: /Question/
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            return View(db.Questions.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Answers" : "";
+            ViewBag.DateSortParm = sortOrder == "Answers" ? "Votes" : "View";
+            var questions = from s in db.Questions
+                           select s;
+            switch (sortOrder)
+            {
+                case "Answers":
+                    questions = questions.OrderBy(s => s.Answers.Count);
+                    
+                    break;
+                case "Votes":
+
+                    questions = questions.OrderBy(s => s.Votetotals.Count - s.Voteminus.Count);
+                    break;
+                case "View":
+                    questions = questions.OrderBy(s => s.Questionviews.Count);
+                    break;
+                default:
+                    questions = questions.OrderByDescending(s => s.QTime);
+                    break;
+            }
+            return View(questions.ToList());
+            //return View(db.Questions.ToList());
         }
 
         // GET: /Question/Details/5

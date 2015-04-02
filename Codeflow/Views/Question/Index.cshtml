@@ -16,11 +16,18 @@
             @Html.DisplayNameFor(model => model.Account.FirstName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Votes)
+            @Html.ActionLink("Votes", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         
         <th>
-            @Html.DisplayNameFor(model => model.Answers)
+            @Html.ActionLink("Answers", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        @{ string Date = "View";}
+        <th>
+            @Html.DisplayNameFor(model => model.QTime)
+        </th>
+        <th>
+            @Html.ActionLink("Views", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         <th></th>
     </tr>
@@ -42,6 +49,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Answers.Count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Questionviews.Count)
         </td>
         
     </tr>
